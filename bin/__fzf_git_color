@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+__fzf_git_color() {
+  if [[ -n $NO_COLOR ]]; then
+    echo never
+  elif [[ $# -gt 0 ]] && [[ -n $FZF_GIT_PREVIEW_COLOR ]]; then
+    echo "$FZF_GIT_PREVIEW_COLOR"
+  else
+    echo "${FZF_GIT_COLOR:-always}"
+  fi
+}
+
+__fzf_git_color "$@"

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+__fzf_git_pager() {
+  local pager
+  pager="${FZF_GIT_PAGER:-${GIT_PAGER:-$(git config --get core.pager 2>/dev/null)}}"
+  echo "${pager:-cat}"
+}
+
+__fzf_git_pager "$@"
