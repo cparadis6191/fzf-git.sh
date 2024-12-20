@@ -1,4 +1,4 @@
-# fzf tmux
+# fzf Git
 
 ## Installation Instructions
 
