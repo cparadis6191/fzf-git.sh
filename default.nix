@@ -28,9 +28,11 @@ stdenv.mkDerivation {
     install -D ./bin/_fzf_git_stashes   $out/bin/
     install -D ./bin/_fzf_git_tags      $out/bin/
     install -D ./bin/_fzf_git_worktrees $out/bin/
+    install -D ./fzf-git.sh             $out/bin/
 
     mkdir --parents $out/share/fzf-git.sh/
 
+    install -D ./fzf-git.sh      $out/share/fzf-git.sh/fzf-git.sh
     install -D ./fzf-git.sh.fish $out/share/fzf-git.sh/fzf-git.sh.fish
 
     runHook postInstall
