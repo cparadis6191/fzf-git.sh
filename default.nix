@@ -1,7 +1,7 @@
 { fzf, git, stdenv, ... }:
 
 stdenv.mkDerivation {
-  pname = "fzf Git sh";
+  pname = "fzf-git-sh";
   version = "0.0.1";
 
   src = ./.;
