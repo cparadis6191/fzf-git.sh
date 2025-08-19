@@ -31,7 +31,7 @@ stdenv.mkDerivation {
 
     mkdir --parents $out/share/fzf-git.sh/
 
-    install -D ./fzf-git.sh.fish $out/share/fzf-git.sh/./fzf-git.sh.fish
+    install -D ./fzf-git.sh.fish $out/share/fzf-git.sh/fzf-git.sh.fish
 
     runHook postInstall
   '';
