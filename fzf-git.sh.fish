@@ -1,5 +1,5 @@
 function __fzf_git_sh_fish
-    commandline --insert (eval $argv[1] | string join ' ')
+    commandline --insert (eval $argv | string join ' ')
 end
 
 bind \cg\cb '__fzf_git_sh_fish _fzf_git_branches'
