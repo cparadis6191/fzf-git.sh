@@ -16,6 +16,7 @@ Installation
 1. Install the latest version of [fzf][fzf]
     * (Optional) Install [bat](https://github.com/sharkdp/bat) for
       syntax-highlighted file previews
+    * Git v2.42.0 or later is required for the `git for-each-ref` binding
 1. Source [fzf-git.sh](https://raw.githubusercontent.com/junegunn/fzf-git.sh/main/fzf-git.sh) file from your .bashrc or .zshrc
 
 Usage
@@ -23,6 +24,7 @@ Usage
 
 ### List of bindings
 
+* <kbd>CTRL-G</kbd><kbd>?</kbd> to show this list
 * <kbd>CTRL-G</kbd><kbd>CTRL-F</kbd> for **F**iles
 * <kbd>CTRL-G</kbd><kbd>CTRL-B</kbd> for **B**ranches
 * <kbd>CTRL-G</kbd><kbd>CTRL-T</kbd> for **T**ags
@@ -63,12 +65,13 @@ Customization
 ```sh
 # Redefine this function to change the options
 _fzf_git_fzf() {
-  fzf --height=50% --tmux 90%,70% \
-    --layout=reverse --multi --min-height=20 --border \
-    --border-label-pos=2 \
-    --color='header:italic:underline,label:blue' \
-    --preview-window='right,50%,border-left' \
-    --bind='ctrl-/:change-preview-window(down,50%,border-top|hidden|)' "$@"
+  fzf --height 50% --tmux 90%,70% \
+    --layout reverse --multi --min-height 20+ --border \
+    --no-separator --header-border horizontal \
+    --border-label-pos 2 \
+    --color 'label:blue' \
+    --preview-window 'right,50%' --preview-border line \
+    --bind 'ctrl-/:change-preview-window(down,50%|hidden|)' "$@"
 }
 ```
 
