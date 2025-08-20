@@ -23,6 +23,39 @@
 # shellcheck disable=SC2039
 [[ $0 = - ]] && return
 
+__fzf_git_color() {
+  if [[ -n $NO_COLOR ]]; then
+    echo never
+  elif [[ $# -gt 0 ]] && [[ -n $FZF_GIT_PREVIEW_COLOR ]]; then
+    echo "$FZF_GIT_PREVIEW_COLOR"
+  else
+    echo "${FZF_GIT_COLOR:-always}"
+  fi
+}
+
+__fzf_git_cat() {
+  if [[ -n $FZF_GIT_CAT ]]; then
+    echo "$FZF_GIT_CAT"
+    return
+  fi
+
+  # Sometimes bat is installed as batcat
+  _fzf_git_bat_options="--style='${BAT_STYLE:-full}' --color=$(__fzf_git_color .) --pager=never"
+  if command -v batcat > /dev/null; then
+    echo "batcat $_fzf_git_bat_options"
+  elif command -v bat > /dev/null; then
+    echo "bat $_fzf_git_bat_options"
+  else
+    echo cat
+  fi
+}
+
+__fzf_git_pager() {
+  local pager
+  pager="${FZF_GIT_PAGER:-${GIT_PAGER:-$(git config --get core.pager 2>/dev/null)}}"
+  echo "${pager:-cat}"
+}
+
 if [[ $1 = --list ]]; then
   shift
   if [[ $# -eq 1 ]]; then
