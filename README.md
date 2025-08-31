@@ -95,6 +95,19 @@ gswt() {
 }
 ```
 
+In fish, each binding is backed by `__fzf_git_sh *` so you can do something
+like this this in your shell configuration file.
+
+```fish
+function gco
+  _fzf_git_sh each_ref --no-multi | xargs git checkout
+end
+
+function gswt
+  cd (_fzf_git_sh worktrees --no-multi)
+end
+```
+
 Environment Variables
 ---------------------
 
