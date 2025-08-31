@@ -4,7 +4,7 @@ function __fzf_git_sh
     # having to modify `$PATH`.
     set --function fzf_git_sh_path (realpath (status dirname))
 
-    commandline --insert (SHELL=bash bash "$fzf_git_sh_path/fzf-git.sh" --run $argv | string join ' ')
+    SHELL=bash bash $fzf_git_sh_path/fzf-git.sh --run $argv
 end
 
 set --local commands branches each_ref files hashes lreflogs remotes stashes tags worktrees
@@ -12,8 +12,8 @@ set --local commands branches each_ref files hashes lreflogs remotes stashes tag
 for command in $commands
     set --function key (string sub --length=1 $command)
 
-    eval "bind -M default \cg$key   '__fzf_git_sh $command'"
-    eval "bind -M insert  \cg$key   '__fzf_git_sh $command'"
-    eval "bind -M default \cg\c$key '__fzf_git_sh $command'"
-    eval "bind -M insert  \cg\c$key '__fzf_git_sh $command'"
+    eval "bind -M default \cg$key   'commandline --insert (__fzf_git_sh $command | string join \" \")'"
+    eval "bind -M insert  \cg$key   'commandline --insert (__fzf_git_sh $command | string join \" \")'"
+    eval "bind -M default \cg\c$key 'commandline --insert (__fzf_git_sh $command | string join \" \")'"
+    eval "bind -M insert  \cg\c$key 'commandline --insert (__fzf_git_sh $command | string join \" \")'"
 end
